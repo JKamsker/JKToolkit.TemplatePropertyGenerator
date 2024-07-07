@@ -1,4 +1,15 @@
-# JKToolkit.TemplatePropertyGenerator
+<!-- # JKToolkit.TemplatePropertyGenerator -->
+
+<p align="center">
+  <a>
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo_small_128x128.png">
+      <img src="assetss/logo/logo_small_128x128.png" height="128">
+    </picture>
+    <h1 align="center">TemplatePropertyGenerator</h1>
+  </a>
+</p>
+
 
 ## Overview
 
