@@ -1,7 +1,7 @@
 using SourceGeneratorTestHelpers;
-using JKToolkit.TemplatePropertyGenerator;
+using JKToolKit.TemplatePropertyGenerator;
 
-namespace JKToolkit.TemplatePropertyGenerator.Tests;
+namespace JKToolKit.TemplatePropertyGenerator.Tests;
 
 public class FormatPropertyGeneratorTests
 {
@@ -11,7 +11,7 @@ public class FormatPropertyGeneratorTests
         string input = """
             namespace Tests;
 
-            [FormatPropertyGenerator("Hello", "Hello {value}")]
+            [TemplateProperty("Hello", "Hello {value}")]
             public static partial class Consts
             {
             }

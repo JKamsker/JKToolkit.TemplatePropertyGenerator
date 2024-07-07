@@ -4,11 +4,45 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		
+		
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(Configuration) == 'Release'">
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		
 		<PackageId>JKToolKit.TemplatePropertyGenerator</PackageId>
 		<Title>TemplateProperty Generator</Title>
-		<Version>0.0.1</Version>
+		<Version>0.0.3</Version>
+		<Authors>Jonas Kamsker</Authors>
+		<Description>Generates strongly typed stringformatters based on stringformats.</Description>
+		<PackageProjectUrl>https://github.com/JKamsker/JKToolKit.TemplatePropertyGenerator</PackageProjectUrl>
+		<PackageIcon>logo_small_128x128.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/JKamsker/JKToolKit.TemplatePropertyGenerator</RepositoryUrl>
+		<PackageTags>Template, c#, SourceGen</PackageTags>
+		
 	</PropertyGroup>
+	
+	<ItemGroup Condition="$(Configuration) == 'Release'">
+	  <None Include="..\assets\logo\logo_small_128x128.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Package the generator in the analyzer directory of the nuget package -->
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
+
 
 
 	<ItemGroup>

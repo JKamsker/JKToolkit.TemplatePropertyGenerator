@@ -1,6 +1,6 @@
-﻿using static JKToolkit.TemplatePropertyGenerator.FormattableHelpers;
+﻿using static JKToolKit.TemplatePropertyGenerator.FormattableHelpers;
 
-namespace JKToolkit.TemplatePropertyGenerator.Tests;
+namespace JKToolKit.TemplatePropertyGenerator.Tests;
 
 public class FormattableTests
 {

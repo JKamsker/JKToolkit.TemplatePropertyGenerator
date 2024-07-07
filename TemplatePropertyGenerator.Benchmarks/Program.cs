@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace JKToolkit.TemplatePropertyGenerator.Benchmarks;
+namespace JKToolKit.TemplatePropertyGenerator.Benchmarks;
 
 internal class Program
 {

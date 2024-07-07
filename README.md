@@ -1,4 +1,4 @@
-<!-- # JKToolkit.TemplatePropertyGenerator -->
+<!-- # JKToolKit.TemplatePropertyGenerator -->
 
 <p align="center">
   <a>
@@ -10,6 +10,13 @@
   </a>
 </p>
 
+<p align="center">
+  <a href="https://www.nuget.org/packages/JKToolKit.TemplatePropertyGenerator/"><img src="https://img.shields.io/nuget/v/JKToolKit.TemplatePropertyGenerator" alt="NuGet"></a>
+  <a href="https://www.nuget.org/packages/JKToolKit.TemplatePropertyGenerator/"><img src="https://img.shields.io/nuget/dt/JKToolKit.TemplatePropertyGenerator" alt="Nuget"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/JKamsker/JKToolKit.TemplatePropertyGenerator" alt="License"></a>
+  <a href="https://github.com/JKamsker/JKToolKit.TemplatePropertyGenerator/pulls"><img src="https://img.shields.io/badge/PR-Welcome-blue" alt="PR"></a>
+  <!-- <a href="https://github.com/JKamsker/JKToolKit.TemplatePropertyGenerator/actions/workflows/build-test.yml"><img src="https://img.shields.io/github/actions/workflow/status/JKamsker/JKToolKit.TemplatePropertyGenerator/build-test.yml?branch=master" alt="GitHub Workflow Status"></a> -->
+</p>
 
 ## Overview
 
@@ -28,7 +35,7 @@
 	Ensure you have the NuGet package installed in your project. If not, you can install it via the NuGet Package Manager or the .NET CLI.
 
 	```sh
-	dotnet add package JKToolkit.TemplatePropertyGenerator
+	dotnet add package JKToolKit.TemplatePropertyGenerator
 	```
 
 2. **Define your templates:**

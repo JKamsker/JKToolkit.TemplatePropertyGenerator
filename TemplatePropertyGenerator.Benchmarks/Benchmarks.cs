@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace JKToolkit.TemplatePropertyGenerator.Benchmarks;
+namespace JKToolKit.TemplatePropertyGenerator.Benchmarks;
 
 public static class ConstsClass
 {

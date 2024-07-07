@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
-namespace JKToolkit.TemplatePropertyGenerator;
+namespace JKToolKit.TemplatePropertyGenerator;
 
 [Generator]
 public class TemplatePropertySourceGenerator : IIncrementalGenerator
@@ -23,6 +23,8 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         var compilationAndClasses = context.CompilationProvider.Combine(classDeclarations.Collect());
 
         context.RegisterSourceOutput(compilationAndClasses, static (spc, source) => Execute(source.Left, source.Right, spc));
+
+   
     }
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node)
@@ -51,7 +53,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
 
     private static void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax?> classes, SourceProductionContext context)
     {
-        EnsureTemplatePropertyAttribute(compilation, context);
+        //EnsureTemplatePropertyAttribute(compilation, context);
         foreach (var classDeclaration in classes.Distinct())
         {
             if (classDeclaration is null) continue;
@@ -64,34 +66,34 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         }
     }
 
-    private static void EnsureTemplatePropertyAttribute(Compilation compilation, SourceProductionContext context)
-    {
-        var attributeSymbol = compilation.GetTypeByMetadataName("TemplatePropertyAttribute");
+    //private static void EnsureTemplatePropertyAttribute(Compilation compilation, SourceProductionContext context)
+    //{
+    //    var attributeSymbol = compilation.GetTypeByMetadataName("TemplatePropertyAttribute");
 
-        if (attributeSymbol != null)
-        {
-            return;
-        }
+    //    if (attributeSymbol != null)
+    //    {
+    //        return;
+    //    }
 
-        var attributeSource = """
-            using System;
+    //    var attributeSource = """
+    //        using System;
 
-            [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-            internal class TemplatePropertyAttribute : Attribute
-            {
-                public string Name { get; }
-                public string Format { get; }
+    //        [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    //        internal class TemplatePropertyAttribute : Attribute
+    //        {
+    //            public string Name { get; }
+    //            public string Format { get; }
 
-                public TemplatePropertyAttribute(string name, string format)
-                {
-                    Name = name;
-                    Format = format;
-                }
-            }
-            """;
+    //            public TemplatePropertyAttribute(string name, string format)
+    //            {
+    //                Name = name;
+    //                Format = format;
+    //            }
+    //        }
+    //        """;
 
-        context.AddSource("TemplatePropertyAttribute.g.cs", SourceText.From(attributeSource, Encoding.UTF8));
-    }
+    //    context.AddSource("TemplatePropertyAttribute.g.cs", SourceText.From(attributeSource, Encoding.UTF8));
+    //}
 
 
     private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string className, string? namespaceName)
