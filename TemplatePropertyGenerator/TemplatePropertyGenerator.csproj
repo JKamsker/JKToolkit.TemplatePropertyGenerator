@@ -16,7 +16,7 @@
 		
 		<PackageId>JKToolKit.TemplatePropertyGenerator</PackageId>
 		<Title>TemplateProperty Generator</Title>
-		<Version>0.0.3</Version>
+		<Version>0.0.4</Version>
 		<Authors>Jonas Kamsker</Authors>
 		<Description>Generates strongly typed stringformatters based on stringformats.</Description>
 		<PackageProjectUrl>https://github.com/JKamsker/JKToolKit.TemplatePropertyGenerator</PackageProjectUrl>

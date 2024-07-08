@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
@@ -60,43 +61,48 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
 
             var namespaceName = GetNamespace(classDeclaration);
             var className = classDeclaration.Identifier.Text;
-            var generatedCode = GenerateClassCode(classDeclaration, className, namespaceName);
 
-            context.AddSource($"{className}_Generated.cs", SourceText.From(generatedCode, Encoding.UTF8));
+            var isPartial = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword));
+
+            if(!isPartial)
+            {
+                // Show diagnostic
+                context.ReportDiagnostic
+                (
+                    Diagnostic.Create
+                    (
+                        new DiagnosticDescriptor
+                        (
+                            id: "TPG001",
+                            title: "Class must be static partial",
+                            messageFormat: "Class must be static partial",
+                            category: "TemplatePropertyGenerator",
+                            defaultSeverity: DiagnosticSeverity.Error,
+                            isEnabledByDefault: true
+                        ), 
+                        classDeclaration.GetLocation()
+                    )
+                );
+                continue;
+            }
+
+            var isStatic = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword));
+
+
+            var modifiers = isStatic ? "static partial" : "partial";
+            var access = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PublicKeyword)) ? "public" : "internal";
+
+
+            var decl = $"{access} {modifiers} class {className}";
+
+            var generatedCode = GenerateClassCode(classDeclaration, className, namespaceName, decl);
+
+            context.AddSource($"{namespaceName}.{className}_Generated.cs", SourceText.From(generatedCode, Encoding.UTF8));
         }
     }
 
-    //private static void EnsureTemplatePropertyAttribute(Compilation compilation, SourceProductionContext context)
-    //{
-    //    var attributeSymbol = compilation.GetTypeByMetadataName("TemplatePropertyAttribute");
 
-    //    if (attributeSymbol != null)
-    //    {
-    //        return;
-    //    }
-
-    //    var attributeSource = """
-    //        using System;
-
-    //        [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    //        internal class TemplatePropertyAttribute : Attribute
-    //        {
-    //            public string Name { get; }
-    //            public string Format { get; }
-
-    //            public TemplatePropertyAttribute(string name, string format)
-    //            {
-    //                Name = name;
-    //                Format = format;
-    //            }
-    //        }
-    //        """;
-
-    //    context.AddSource("TemplatePropertyAttribute.g.cs", SourceText.From(attributeSource, Encoding.UTF8));
-    //}
-
-
-    private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string className, string? namespaceName)
+    private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string className, string? namespaceName, string decl)
     {
         var sb = new StringBuilder();
 
@@ -107,7 +113,12 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
             sb.AppendLine($"namespace {namespaceName}");
             sb.AppendLine("{");
         }
-        sb.AppendLine($"    public static partial class {className}");
+
+       
+
+
+
+        sb.AppendLine($"    {decl}");
         sb.AppendLine("    {");
 
         foreach (var attributeListSyntax in classDeclaration.AttributeLists)
