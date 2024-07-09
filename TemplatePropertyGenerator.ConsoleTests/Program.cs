@@ -4,17 +4,8 @@ internal static class Program
 {
     private static void Main(string[] args)
     {
-        MyClass m = new();
-        
-
         Console.WriteLine(Consts1.Hello.Format("World"));
     }
-}
-
-[TemplateProperty("Hello", "Hello {value}, {value}!")]
-public partial class MyClass
-{
-
 }
 
 [TemplateProperty("Hello", "Hello {value}, {value}!")]

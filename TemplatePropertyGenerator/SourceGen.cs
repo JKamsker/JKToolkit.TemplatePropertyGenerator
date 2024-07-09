@@ -91,7 +91,6 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
 
             var isStatic = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword));
 
-
             var modifiers = isStatic ? "static partial" : "partial";
             var access = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PublicKeyword)) ? "public" : "internal";
 
