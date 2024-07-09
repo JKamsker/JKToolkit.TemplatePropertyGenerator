@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-  <Nullable>disable</Nullable>
-  <ImplicitUsings>disable</ImplicitUsings>
     <NoWarn>1701;1702;IDE0063</NoWarn>
 	</PropertyGroup>
 
