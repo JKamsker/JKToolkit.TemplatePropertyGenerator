@@ -25,7 +25,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(compilationAndClasses, static (spc, source) => Execute(source.Left, source.Right, spc));
 
-   
+
     }
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node)
@@ -54,7 +54,6 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
 
     private static void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax?> classes, SourceProductionContext context)
     {
-        //EnsureTemplatePropertyAttribute(compilation, context);
         foreach (var classDeclaration in classes.Distinct())
         {
             if (classDeclaration is null) continue;
@@ -64,7 +63,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
 
             var isPartial = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword));
 
-            if(!isPartial)
+            if (!isPartial)
             {
                 // Show diagnostic
                 context.ReportDiagnostic
@@ -79,7 +78,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
                             category: "TemplatePropertyGenerator",
                             defaultSeverity: DiagnosticSeverity.Error,
                             isEnabledByDefault: true
-                        ), 
+                        ),
                         classDeclaration.GetLocation()
                     )
                 );
@@ -113,10 +112,6 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
             sb.AppendLine($"namespace {namespaceName}");
             sb.AppendLine("{");
         }
-
-       
-
-
 
         sb.AppendLine($"    {decl}");
         sb.AppendLine("    {");
@@ -183,7 +178,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         return sb.ToString();
     }
 
-    
+
 
     private static bool IsTemplatePropertyAttribute(AttributeSyntax attributeSyntax)
     {

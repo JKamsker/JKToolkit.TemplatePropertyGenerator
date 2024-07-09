@@ -1,5 +1,4 @@
 using SourceGeneratorTestHelpers;
-using JKToolKit.TemplatePropertyGenerator;
 
 namespace JKToolKit.TemplatePropertyGenerator.Tests;
 
