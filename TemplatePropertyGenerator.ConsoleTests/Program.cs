@@ -1,12 +1,9 @@
 ﻿namespace JKToolKit.TemplatePropertyGenerator.ConsoleTests;
 
-internal class Program
+internal static class Program
 {
     private static void Main(string[] args)
     {
-        //Console.WriteLine(Consts.Hello.Template);
-        //Console.WriteLine(Consts.Hello.Format("World"));
-
         Console.WriteLine(Consts1.Hello.Format("World"));
     }
 }

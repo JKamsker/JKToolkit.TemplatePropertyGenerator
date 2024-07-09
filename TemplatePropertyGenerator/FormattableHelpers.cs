@@ -2,7 +2,7 @@
 
 namespace JKToolKit.TemplatePropertyGenerator;
 
-internal class FormattableHelpers
+internal static class FormattableHelpers
 {
     internal static List<string> GetFormattableVariables(string formatString)
     {
