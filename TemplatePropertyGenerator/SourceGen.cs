@@ -62,8 +62,8 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         {
             if (classDeclaration is null) continue;
 
-            var namespaceName = GetNamespace(classDeclaration);
-            var className = classDeclaration.Identifier.Text;
+            var @namespace = GetNamespace(classDeclaration);
+            var @class = classDeclaration.Identifier.Text;
 
             var isPartial = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword));
 
@@ -95,19 +95,18 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
             var modifiers = isStatic ? "static partial" : "partial";
             var access = classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PublicKeyword)) ? "public" : "internal";
 
+            var decl = $"{access} {modifiers} class {@class}";
 
-            var decl = $"{access} {modifiers} class {className}";
+            var generatedCode = GenerateClassCode(classDeclaration, @namespace, decl);
 
-            var generatedCode = GenerateClassCode(classDeclaration, namespaceName, decl);
-
-            context.AddSource($"{namespaceName}.{className}_Generated.cs", SourceText.From(generatedCode, Encoding.UTF8));
+            context.AddSource($"{@namespace}.{@class}_Generated.cs", SourceText.From(generatedCode, Encoding.UTF8));
         }
     }
 
-    private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string namespaceName, string decl)
+    private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string @namespace, string decl)
     {
         StringBuilder generatedCode = new();
-        generatedCode.Append(RenderGeneratedCode(namespaceName, decl).Result);
+        generatedCode.Append(RenderGeneratedCode(@namespace, decl).Result);
 
         StringBuilder classCode = new();
 
@@ -178,7 +177,15 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         StringBuilder templateGeneratedCodeSb = new();
         templateGeneratedCodeSb.Append(templateGeneratedCode);
 
-        templateGeneratedCodeSb.Replace("{{namespace}}", $"namespace {@namespace}\n{{").Replace("{{namespaceTerminator}}", "}");
+        if (@namespace != null)
+        {
+            templateGeneratedCodeSb.Replace("{{namespace}}", $"namespace {@namespace}\n{{").Replace("{{namespaceTerminator}}", "}");
+        }
+        else
+        {
+            templateGeneratedCodeSb.Replace("{{namespace}}", null).Replace("{{namespaceTerminator}}", null);
+        }
+
         templateGeneratedCodeSb.Replace("{{classDeclaration}}", $"{decl}\n{{");
 
         return templateGeneratedCodeSb.ToString();
