@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JKToolKit.TemplatePropertyGenerator" Version="0.0.3" />
+    <ProjectReference Include="..\TemplatePropertyGenerator\TemplatePropertyGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

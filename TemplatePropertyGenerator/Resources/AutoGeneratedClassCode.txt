@@ -1,0 +1,20 @@
+﻿        public static readonly {{name}}Class {{name}} = new();
+
+        public class {{name}}Class
+        {
+            public string Template => \"{{format}}\";
+
+            internal {{name}}Class()
+            {
+            }
+
+            public string Format({{formatMethodParameters}})
+            {
+                return $\"{{format}}\";
+            }
+
+            public FormattableString AsFormattable({{formatMethodParameters}})
+            {
+                return $\"{{format}}\";
+            }
+        }

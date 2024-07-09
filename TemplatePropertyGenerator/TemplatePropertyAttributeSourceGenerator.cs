@@ -53,7 +53,7 @@ public class TemplatePropertyAttributeSourceGenerator : ISourceGenerator
         // Add other generation logic here
     }
 
-    private class SyntaxReceiver : ISyntaxReceiver
+    private sealed class SyntaxReceiver : ISyntaxReceiver
     {
         public bool AttributeExists { get; private set; }
 

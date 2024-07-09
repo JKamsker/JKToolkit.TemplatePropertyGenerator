@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace JKToolKit.TemplatePropertyGenerator;
 
-internal class FormattableHelpers
+internal static class FormattableHelpers
 {
     internal static List<string> GetFormattableVariables(string formatString)
     {

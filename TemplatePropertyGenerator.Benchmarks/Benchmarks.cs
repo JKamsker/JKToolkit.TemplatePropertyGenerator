@@ -4,11 +4,11 @@ namespace JKToolKit.TemplatePropertyGenerator.Benchmarks;
 
 public static class ConstsClass
 {
-    public static HelloClass Hello = new();
+    public static HelloClass Hello { get; } = new();
 
     public class HelloClass
     {
-        public string Template { get; }
+        public string? Template { get; }
 
         public string Format(string value)
             => $"Hello {value}, {value}!";

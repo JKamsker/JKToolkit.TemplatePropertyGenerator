@@ -1,5 +1,4 @@
 using SourceGeneratorTestHelpers;
-using JKToolKit.TemplatePropertyGenerator;
 
 namespace JKToolKit.TemplatePropertyGenerator.Tests;
 
@@ -56,9 +55,6 @@ public class FormatPropertyGeneratorTests
 
         var test1Consts = sources.FirstOrDefault(x => x.HintName == "Tests.Consts_Generated.cs");
         var test2Consts = sources.FirstOrDefault(x => x.HintName == "Tests2.Consts_Generated.cs");
-
-        Assert.NotNull(test1Consts);
-        Assert.NotNull(test2Consts);
 
         var genSourceString1 = test1Consts.SourceText.ToString();
         var genSourceString2 = test2Consts.SourceText.ToString();
