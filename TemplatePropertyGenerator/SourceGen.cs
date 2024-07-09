@@ -33,7 +33,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
                classDeclarationSyntax.AttributeLists.Count > 0;
     }
 
-    private static ClassDeclarationSyntax? GetSemanticTargetForGeneration(GeneratorSyntaxContext context)
+    private static ClassDeclarationSyntax GetSemanticTargetForGeneration(GeneratorSyntaxContext context)
     {
         var classDeclarationSyntax = (ClassDeclarationSyntax)context.Node;
 
@@ -51,7 +51,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         return null;
     }
 
-    private static void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax?> classes, SourceProductionContext context)
+    private static void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax> classes, SourceProductionContext context)
     {
         foreach (var classDeclaration in classes.Distinct())
         {
@@ -99,8 +99,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
         }
     }
 
-
-    private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string className, string? namespaceName, string decl)
+    private static string GenerateClassCode(ClassDeclarationSyntax classDeclaration, string className, string namespaceName, string decl)
     {
         var sb = new StringBuilder();
 
@@ -184,7 +183,7 @@ public class TemplatePropertySourceGenerator : IIncrementalGenerator
                string.Equals(name, "TemplateProperty", StringComparison.OrdinalIgnoreCase);
     }
 
-    private static string? GetNamespace(SyntaxNode syntaxNode)
+    private static string GetNamespace(SyntaxNode syntaxNode)
     {
         while (syntaxNode != null)
         {
